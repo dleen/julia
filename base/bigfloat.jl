@@ -121,7 +121,7 @@ function string(x::BigFloat)
     for i = 1:2
         z = Array(Uint8, lng)
         lng = ccall((:__gmp_snprintf,:libgmp), Int32, (Ptr{Uint8}, Int32, Ptr{Uint8}, Ptr{Void}), z, lng, "%.Fe", x.mpf)
-        if lng < 128 || i == 2; return bytestring(convert(Ptr{Uint8}, z[1:lng])); end
+        if lng < 128 || i == 2; r = bytestring(convert(Ptr{Uint8}, z[1:lng])); return r; end
     end
 end
 
